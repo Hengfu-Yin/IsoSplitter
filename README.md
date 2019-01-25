@@ -46,7 +46,7 @@ Download the IsoSplitter release file (IsoSplitter-1.0.tar.gz) from <https://git
     You can run IsoSplitter without installation directly by running the script "IsoSplittingAnchor.py" or "ShortReadsAligner.py" that are in the directory ("scripts") of the source code by:  
     `$ python3.5 IsoSplittingAnchor.py ...` or `$ python3.5 ShortReadsAligner.py ...`
 
-# Usage of IsoSplittingAnchor.py
+# Usage of first step IsoSplittingAnchor
 ## Quick Start  
    `$ IsoSplittingAnchor [options] longReadsFile`  
    by default:   
@@ -68,7 +68,7 @@ Download the IsoSplitter release file (IsoSplitter-1.0.tar.gz) from <https://git
 |  -t \<integer> | the number of threads (default is to use all available threads)|
 
 ## Output Files
-The output directory will be created in the working directory and named 'Fout[time]', where [time] is the current UNIX time according to the system. If the directory already exists, ShortReadsAligner exits with an error message.  
+The output directory will be created in the working directory and named 'Fout[time]', where [time] is the current UNIX time according to the system. If the directory already exists, IsoSplittingAnchor exits with an error message.  
 There are three output files: *Sim4\_align\_out.txt*, *Breakpoint\_out.txt*, *GeneCluster.txt*.  
 
 - **Sim4\_align\_out.txt** :  
@@ -87,15 +87,15 @@ There are three output files: *Sim4\_align\_out.txt*, *Breakpoint\_out.txt*, *Ge
 1. If the sequence contains lowercase characters, the script will automatically convert to uppercase when compared, and output a warning to the console. They don't affect the results, so they can be ignored.
 2. The sequence name can't contain the character '/', it will lead the script to error. If the sequence name has whitespace characters, the name will be trimmed at the first whitespace character.
 
-# Usage of first step IsoSplittingAnchor
+# Usage of second step ShortReadsAligner
 ## Quick Start
     
-  `$ IsoSplittingAnchor [options] longReadsFile shortReadsFile BreakPointFile `  
+  `$ ShortReadsAligner [options] longReadsFile shortReadsFile BreakPointFile `  
   by default:  
-  `$ IsoSplittingAnchor -t 4 -n 3 longReadsFile shortReadsFile BreakPointFile `  
+  `$ ShortReadsAligner -t 4 -n 3 longReadsFile shortReadsFile BreakPointFile `  
   
-  If you run the script "IsoSplittingAnchor.py" directly:  
-  `$ python3.5 IsoSplittingAnchor.py [options] longReadsFile shortReadsFile BreakPointFile `
+  If you run the script "ShortReadsAligner.py" directly:  
+  `$ python3.5 ShortReadsAligner.py [options] longReadsFile shortReadsFile BreakPointFile `
 
 ## Command Line Options
 | Main arguments: |  |
@@ -111,7 +111,7 @@ There are three output files: *Sim4\_align\_out.txt*, *Breakpoint\_out.txt*, *Ge
 | -q, --fastq | If this option is present, the shortReadsFile must be in fastq format (default is in fasta format) |
 
 ## Output Files
-The output directory will be created in the directory where the program run and it defaults to 'Sout[time]', where [time] is the current UNIX time according to the system. If the directory already exists, IsoSplittingAnchor exits with an error message.  
+The output directory will be created in the directory where the program run and it defaults to 'Sout[time]', where [time] is the current UNIX time according to the system. If the directory already exists, ShortReadsAligner exits with an error message.  
 There are two output files:  *ShortReadsMapped.sam*, *JunctionReadsCount.txt*.
 
 - **ShortReadsMapped.sam** :
@@ -122,6 +122,18 @@ There are two output files:  *ShortReadsMapped.sam*, *JunctionReadsCount.txt*.
 >> reference sequence name {breakpoint :  junction-read count, ... }
 
 ## Notes
-1. The options of "-t<integer>" and "-n<integer>" are limited, t*n<= total number of CPUs. If you don't know the total number of CPUs, you can use "IsoSplittingAnchor -h" to query. It will appear in the description of IsoSplittingAnchor.
-2. The number of threads (option of -t) is optimized around 4. You can adjust the number of files (option of -n) to reduce IsoSplittingAnchor's running time.
+1. The options of "-t<integer>" and "-n<integer>" are limited, t*n<= total number of CPUs. If you don't know the total number of CPUs, you can use "ShortReadsAligner -h" to query. It will appear in the description of ShortReadsAligner.
+2. The number of threads (option of -t) is optimized around 4. You can adjust the number of files (option of -n) to reduce ShortReadsAligner's running time.
 3. At least 50G of hard disk space is recommended, due to the large size of temporary and final alignment files.
+
+# Example Datasets
+We use current gene transcripts data from Arabidopsis thaliana to test the identification of alternative splicing sites. Transcripts are available from the TAIR website ([Araport11_genes.201606.cdna.fasta.gz](https://www.arabidopsis.org/download_files/Genes/Araport11_genome_release/Araport11_blastsets/Araport11_genes.201606.cdna.fasta.gz)). We further align the short reads from a previous study (Li et al. 2016 Dev. Cell) to validate the prediction of split-sites from previous step. The short-reads file is available from the NCBI SRA database (accession SRR3664433). For testing by ShortReadsAligner, you need to convert SRA data into fastq format, and filter adaptor and low-quality sequences.  
+
+The followings are some scripts for quick reproduction of the test results.     
+**To identify the split-sites:**  
+	 `$ IsoSplittingAnchor Araport11_genes.201606.cdna.fasta`  
+**To validate the split-sites:**  
+Breakpoint_out.txt is one of the output of first step, Araport11_genes.201606.cdna.fasta is the same file of first step, SRR3664433.fasta / SRR3664433.fastq is sequencing data.  
+	 `$ ShortReadsAligner Araport11_genes.201606.cdna.fasta SRR3664433.fasta Breakpoint_out.txt`  
+   or  
+	 `$ ShortReadsAligner -q Araport11_genes.201606.cdna.fasta SRR3664433.fastq Breakpoint_out.txt`  
