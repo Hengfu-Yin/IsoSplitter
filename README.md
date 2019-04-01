@@ -5,6 +5,8 @@
 
 **ShortReadsAligner.py** is used to evaluate the splitting sites by counting the eligible breaking points. This step analysis a short-read RNA sequencing dataset to find the “junction reads”-reads partially mapped next to the breaking sites and exclusively split at the same location, and count the numbers of junction reads for each breaking sites. 
 
+![IsoSplitter_workflow](Images/IsoSplitter.png)
+
 # Installation
 ## Dependencies of IsoSplitter:
 * Python (version:>=3.5)
@@ -137,3 +139,5 @@ Breakpoint_out.txt is one of the output of first step, Araport11_genes.201606.cd
 	 `$ ShortReadsAligner Araport11_genes.201606.cdna.fasta SRR3664433.fasta Breakpoint_out.txt`  
    or  
 	 `$ ShortReadsAligner -q Araport11_genes.201606.cdna.fasta SRR3664433.fastq Breakpoint_out.txt`  
+	 
+![Data_simple](Images/Data_simple.png)
