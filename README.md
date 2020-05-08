@@ -118,14 +118,18 @@ There are three output files: *Sim4\_align\_out.txt*, *Breakpoint\_out.txt*, *Ge
 
 ## Output Files
 The output directory will be created in the directory where the program run and it defaults to 'Sout[time]', where [time] is the current UNIX time according to the system. If the directory already exists, ShortReadsAligner exits with an error message.  
-There are two output files:  *ShortReadsMapped.sam*, *JunctionReadsCount.txt*.
+There are four output files:  *ShortReadsMapped.sam*,*ACMMapped.sam*,*JunctionReadsCount.txt* and *Average_counts_per.txt*.
 
-- **ShortReadsMapped.sam** :
+- **ShortReadsMapped.sam and ACMMapped.sam** :
 > Sequence alignment result through bowtie2
 
 - **JunctionReadsCount.txt** :
 > Format of each record:
 >> reference sequence name {breakpoint :  junction-read count, ... }
+
+- **Average_counts_per.txt** :
+> Format of each record:
+>> reference sequence name	average counts
 
 ## Notes
 1. The options of "-t<integer>" and "-n<integer>" are limited, t*n<= total number of CPUs. If you don't know the total number of CPUs, you can use "ShortReadsAligner -h" to query. It will appear in the description of ShortReadsAligner.
