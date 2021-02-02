@@ -83,7 +83,7 @@ There are three output files: *Sim4\_align\_out.txt*, *Breakpoint\_out.txt*, *Ge
 - **Breakpoint_out.txt** :  
 > Format of each record :  
 > >  seq = the transcripts sequence name  
-> >  total number of isoforms   {breakpoint : location of split-site, ... }
+> >  total number of isoforms &nbsp;&nbsp; {breakpoint : location of split-site, ... }
 
 - **GeneCluster.txt** :  
 > sequence IDs that are transcript isoforms, and each cluster is a potential gene locus for alternative splicing isoforms
@@ -132,11 +132,11 @@ To track the reads of the predicted splice sites, ShortReadsMapped.sam and ACMMa
 
 - **JunctionReadsCount.txt** :
 > Format of each record:
->> reference sequence name {breakpoint :  junction-read count, ... }
+>> reference sequence name &nbsp;&nbsp; {breakpoint :  junction-read count, ... }
 
 - **Average_counts_per.txt** :
 > Format of each record:
->> reference sequence name	ACM counts
+>> reference sequence name  &nbsp;&nbsp; ACM counts
 
 ## Notes
 1. The options of "-t<integer>" and "-n<integer>" are limited, t*n<= total number of CPUs. If you don't know the total number of CPUs, you can use "ShortReadsAligner -h" to query. It will appear in the description of ShortReadsAligner.
