@@ -5,7 +5,7 @@ import textwrap
 #The function for Python packing
 setup(
         name="IsoSplitter",
-        version="1.1",
+        version="1.2",
         description=("identification of alternative splicing sites using long-read transcriptome without a reference genome"),
         author="Hengfu-Yin",
         author_email="hfyin@caf.ac.cn",
