@@ -5,9 +5,9 @@
 
 **ShortReadsAligner.py** is used to evaluate the splitting sites by counting the eligible breaking points. This step analysis a short-read RNA sequencing dataset to find the “junction reads”-reads partially mapped next to the breaking sites and exclusively split at the same location, and count the numbers of junction reads for each breaking sites. In order to reveal the tissue-specific expression of isoforms, we provide a method to determine the expression levels of isoforms based on isoform-specific reads: Average Counts per Million of total reads (ACM). For an isoform with multiple split sites, the ACM is calculated as an average number of isoform-specific reads normalized to millions of total used reads. The ACM is defined by as following: ACM=（total isoform-specific reads of a transcript/split sites of the transcript）\*（total mapped reads to this transcript/transcript base number）\*10<sup>-6</sup>. 
 
-**Citation** 
-If you use IsoSplitter in your work, please cite this:
-  1.Wang Y, Hu Z, Ye N, Yin H. IsoSplitter: identification and characterization of alternative splicing sites without a reference genome. RNA. 2021 May 21;27(8):868–75. doi: 10.1261/rna.077834.120.
+**Citation**  
+If you use IsoSplitter in your work, please cite this:  
+&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;Wang Y, Hu Z, Ye N, Yin H. IsoSplitter: identification and characterization of alternative splicing sites without a reference genome. RNA. 2021 May 21;27(8):868–75. doi: 10.1261/rna.077834.120.
 
 **Design principle of IsoSplitter**  
 
